@@ -1,0 +1,37 @@
+{
+  "id": "1609480",
+  "name": "node-vue-moba",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1059027",
+      "name": "menu",
+      "font_class": "icontabmenu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "1375630",
+      "name": "hero",
+      "font_class": "hero",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "1608363",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "4825969",
+      "name": "news",
+      "font_class": "news",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    }
+  ]
+}

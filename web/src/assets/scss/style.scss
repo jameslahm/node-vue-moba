@@ -1,3 +1,5 @@
+@import "variables";
+
 * {
   box-sizing: border-box;
   outline: none;
@@ -19,21 +21,10 @@ a {
   columns: #999;
 }
 
-$colors: (
-  "primary": #db9e3f,
-  "white": #fff,
-  "light": #f9f9f9,
-  "grey": #999,
-  "grey-1": #666,
-  "dark-1": #343440,
-  "dark": #222,
-  "black": #000
-);
-
 // text
 @each $var in (left, center, right) {
   .text-#{$var} {
-    text-align: $var;
+    text-align: $var !important;
   }
 }
 
@@ -48,20 +39,6 @@ $colors: (
 }
 
 //font size
-$base-font-size: 13px;
-$font-sizes: (
-  xxs: 0.6154rem,
-  //8px
-    xs: 0.7692rem,
-  //10px
-    sm: 0.9231rem,
-  //12px
-    md: 1rem,
-  //13px
-    lg: 1.0769rem,
-  //14px
-    xl: 1.2308rem //16px
-);
 
 @each $sizeKey, $size in $font-sizes {
   .fs-#{$sizeKey} {
@@ -74,28 +51,11 @@ $font-sizes: (
   display: flex;
 }
 
-$flex-jc: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  between: space-between,
-  around: space-around
-);
-
 @each $key, $value in $flex-jc {
   .jc-#{$key} {
     justify-content: $value;
   }
 }
-
-$flex-ai: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  between: space-between,
-  around: space-around,
-  stretch: stretch
-);
 
 @each $key, $value in $flex-ai {
   .ai-#{$key} {
@@ -116,26 +76,6 @@ $flex-ai: (
 }
 
 // spacing
-
-$spacing-types: (
-  m: margin,
-  p: padding
-);
-$spacing-directions: (
-  t: top,
-  r: right,
-  b: bottom,
-  l: left
-);
-$spacing-base-size: 1rem;
-$spacing-sizes: (
-  0: 0,
-  1: 0.25,
-  2: 0.5,
-  3: 1,
-  4: 1.5,
-  5: 3
-);
 
 @each $typeKey, $type in $spacing-types {
   @each $sizeKey, $size in $spacing-sizes {
@@ -178,19 +118,51 @@ $spacing-sizes: (
 
 // nav
 .nav {
+  display: flex;
   .nav-item {
     border-bottom: 2px solid transparent;
+    padding-bottom: 0.2rem;
+    color: map-get($colors, "dark");
     &.active {
-      border-bottom: 2px solid #fff;
+			color:map-get($colors,'primary');
+      border-bottom: 2px solid map-get($colors, "primary");
     }
-  }
+	}
+	&.nav-inverse{
+		.nav-item{
+			color:map-get($colors,'white');
+			&.active{
+				border-bottom-color: map-get($colors,'white');
+			}
+		}
+	}
 }
 
 //width height
-.w-100{
-	width: 100%;
+.w-100 {
+  width: 100%;
 }
 
-.h-100{
-	height: 100%;
+.h-100 {
+  height: 100%;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.sprite {
+  background: url(../images/index.png) no-repeat 0 0;
+  display: inline-block;
+  background-size: 28.8462rem;
+  &.sprite-news {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.577%;
+  }
+  &.sprite-arrow {
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+  }
 }
