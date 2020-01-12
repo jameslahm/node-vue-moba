@@ -1,9 +1,9 @@
 <template>
   <div class="about">
-    <h1>{{id?'编辑':'新建'}}管理员</h1>
+    <h1>{{id?'编辑':'新建'}}文章</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="所属分类">
-        <el-select v-model="model.catagories" placeholder>
+        <el-select v-model="model.categories" multiple placeholder>
           <el-option
             v-for="item in categories"
             :key="item._id"

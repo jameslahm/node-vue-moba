@@ -24,7 +24,7 @@ module.exports = app => {
 		if (req.Model.modelName === 'Category') {
 			queryOptions.populate = 'parent'
 		}
-		const items = await req.Model.find().populate('parent').limit(10)
+		const items = await req.Model.find().setOptions(queryOptions).limit(100)
 		res.send(items)
 	})
 	router.get('/:id', async (req, res) => {
@@ -35,7 +35,7 @@ module.exports = app => {
 		const model = await req.Model.findByIdAndDelete(req.params.id)
 		res.send(model)
 	})
-	app.use('/admin/api/rest/:resource', authMiddleware(),resourceMiddleware(),router)
+	app.use('/admin/api/rest/:resource',resourceMiddleware(),router)
 
 	const multer = require('multer')
 	const upload = multer({ dest: __dirname + '/../../uploads' })

@@ -19,58 +19,43 @@
           <div class="py-2">爆料站</div>
         </div>
       </div>
-			<div class="bg-light py-2 fs-sm">
-				<i class="sprite sprite-arrow mr-1">
-				</i>
-				<span>收起</span>
-			</div>
+      <div class="bg-light py-2 fs-sm">
+        <i class="sprite sprite-arrow mr-1"></i>
+        <span>收起</span>
+      </div>
     </div>
 
-		<m-card title="新闻" icon="menu">
-			<div class="nav jc-between">
-					<div class="nav-item active">
-						<div class="nav-link">热门</div>
-					</div>
-					<div class="nav-item">
-						<div class="nav-link">热门</div>
-					</div>
-					<div class="nav-item">
-						<div class="nav-link">热门</div>
-					</div>
-					<div class="nav-item">
-						<div class="nav-link">热门</div>
-					</div>
-					<div class="nav-item">
-						<div class="nav-link">热门</div>
-					</div>
-				</div>
-				<div class="pt-3">
-					<swiper>
-					<swiper-slide v-for="m in 5" :key=m> 
-						<div class="py-2 text-left" v-for="n in 5" :key="n"> 
-							<span>新闻</span>
-							<span>|</span>
-							<span>夏日新版本</span>
-						</div>
-					</swiper-slide>
-				</swiper>
-				</div>
-		</m-card>
-
-		<m-card title="英雄列表" icon="menu">
-		</m-card>
-
-		
-		<m-card title="英雄列表" icon="menu">
-		</m-card>
-
-		<m-card title="英雄列表" icon="menu">
-		</m-card>
+    <m-list-card icon="menu" title="新闻" :categories="newsCat">
+      <template #items="{category}">
+        <div class="text-left py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
+          <span class="">[{{news.categoryName}}]</span>
+					<span class="px-2">|</span>
+          <span class="flex-1 text-ellipsis pr-2">{{news.title}}</span>
+          <span class="text-grey-1 fs-sm">{{news.createdAt | date}}</span>
+        </div>
+      </template>
+    </m-list-card>
+    <m-list-card icon="menu" title="新闻" :categories="newsCat">
+      <template #items="{category}">
+        <div class="text-left py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
+          <span>[{{news.categoryName}}]|</span>
+          <span class="flex-1">{{news.title}}</span>
+          <span>{{news.createdAt | date}}</span>
+        </div>
+      </template>
+    </m-list-card>
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
+
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format("MM/DD");
+    }
+  },
   data() {
     return {
       swiperOption: {
@@ -78,8 +63,18 @@ export default {
           el: ".swiper-pagination"
         },
         autoplay: true
-      }
+      },
+      newsCat: []
     };
+  },
+  methods: {
+    async fetchNewsCats() {
+      const res = await this.$http.get("news/list");
+      this.newsCat = res.data;
+    }
+  },
+  created() {
+    this.fetchNewsCats();
   }
 };
 </script>
@@ -98,8 +93,8 @@ export default {
 }
 
 .nav-icons {
-	border-top: 1px solid $border-color;
-	border-bottom: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
   .nav-item {
     width: 25%;
     border-right: 1px solid $border-color;
