@@ -11,20 +11,20 @@ Vue.config.productionTip = false
 
 import 'swiper/dist/css/swiper.css'
 
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
+Vue.use(VueAwesomeSwiper)
 
 import Card from '../src/components/Card'
-Vue.component('m-card',Card)
+Vue.component('m-card', Card)
 
 import ListCard from '../src/components/ListCard'
-Vue.component('m-list-card',ListCard)
+Vue.component('m-list-card', ListCard)
 
 import axios from 'axios'
-Vue.prototype.$http=axios.create({
-	baseURL:process.env.VUE_APP_API_URL || '/web/api'
+Vue.prototype.$http = axios.create({
+	baseURL: process.env.VUE_APP_API_URL || '/web/api'
 })
 
 new Vue({
-  router,
-  render: h => h(App)
+	router,
+	render: h => h(App)
 }).$mount('#app')
