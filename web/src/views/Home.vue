@@ -35,13 +35,15 @@
         </div>
       </template>
     </m-list-card>
-    <m-list-card icon="menu" title="新闻" :categories="newsCat">
+
+    <m-list-card icon="hero" title="英雄列表" :categories="heroCats">
       <template #items="{category}">
-        <div class="text-left py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
-          <span>[{{news.categoryName}}]|</span>
-          <span class="flex-1">{{news.title}}</span>
-          <span>{{news.createdAt | date}}</span>
-        </div>
+				<div class="d-flex flex-wrap">
+					<div class="p-2 fs-xs" style="width:20%" v-for="(hero,i) in category.heroList" :key="i">
+						<img :src="hero.avatar" class="w-100" alt="">
+						<div>{{hero.name}}</div>
+					</div>
+				</div>
       </template>
     </m-list-card>
   </div>
@@ -64,17 +66,23 @@ export default {
         },
         autoplay: true
       },
-      newsCat: []
+			newsCat: [],
+			heroCats:[]
     };
   },
   methods: {
     async fetchNewsCats() {
       const res = await this.$http.get("news/list");
       this.newsCat = res.data;
-    }
+		},
+		async fetchHeroCats(){
+			const res=await this.$http.get('heroes/list')
+			this.heroCats=res.data
+		}
   },
   created() {
-    this.fetchNewsCats();
+		this.fetchNewsCats();
+		this.fetchHeroCats();
   }
 };
 </script>
