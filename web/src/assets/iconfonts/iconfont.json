@@ -27,6 +27,13 @@
       "unicode_decimal": 58902
     },
     {
+      "icon_id": "3347282",
+      "name": "back",
+      "font_class": "back",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
       "icon_id": "4825969",
       "name": "news",
       "font_class": "news",

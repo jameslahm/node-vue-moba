@@ -130,20 +130,28 @@ module.exports = app => {
 				}
 			}
 		])
-		const subCats=cats.map(v => v._id)
+		const subCats = cats.map(v => v._id)
 		cats.unshift({
-			name:'热门',
-			heroList:await Hero.find().where({
-				categories:{$in:subCats}
+			name: '热门',
+			heroList: await Hero.find().where({
+				categories: { $in: subCats }
 			}).populate('categories').limit(10).lean()
 		})
 
-		cats.map(cat=>{
-			cat.heroList.map(hero=>{
-				hero.categoryName=cat.name==='热门' ? hero.categories[0].name:cat.name
+		cats.map(cat => {
+			cat.heroList.map(hero => {
+				hero.categoryName = cat.name === '热门' ? hero.categories[0].name : cat.name
 			})
 		})
 		res.send(cats)
+	})
+
+	router.get('/articles/:id', async (req, res) => {
+		const data = await Article.findById(req.params.id).lean()
+		data.related = await Article.find().where({
+			categories:{$in:data.categories}
+		}).limit(2)
+		res.send(data)
 	})
 
 	app.use('/web/api', router)
